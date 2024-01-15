@@ -4,7 +4,10 @@ namespace Minesweeper
 {
     class Program
     {
-        //Main Method for Starting the Game, Mines generator and Playing the game 
+        /// <summary>
+        /// Main Method for Starting the Game, Mines generator and Playing the game 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
            var input = new ConsoleInput();

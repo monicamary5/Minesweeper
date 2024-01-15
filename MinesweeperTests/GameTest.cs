@@ -16,10 +16,11 @@ namespace MinesweeperTests
              var game = new Game(input, output, minesGenerator);
              game.CreateBoard();
              var result = game.Board.ToString();
-             const string expectedResult = ". . . . \n" + 
-                                           ". . . . \n" + 
-                                           ". . . . \n" + 
-                                           ". . . . \n";
+             const string expectedResult = "  1 2 3 4 \n" +
+                                           "A . . . . \n" + 
+                                           "B . . . . \n" + 
+                                           "C . . . . \n" + 
+                                           "D . . . . \n";
              
              Assert.Equal(expectedResult, result);
          }        
@@ -36,12 +37,10 @@ namespace MinesweeperTests
              game.CreateBoard();
              game.Play();
              var result = game.Board.ToString();
-            //const string expectedResult = "* * * \n" +
-            //                              "2 2 2 \n" +
-            //                              "0 0 0 \n";
-            const string expectedResult = "* * * \n" +
-                                          "2 3 2 \n" +
-                                          "0 0 0 \n";
+            const string expectedResult = "  1 2 3 \n" +
+                                          "A * * * \n" +
+                                          "B 2 3 2 \n" +
+                                          "C 0 0 0 \n";
              Assert.Equal(expectedResult, result);
              Assert.Equal(GameState.Win, game.State);
          }
@@ -58,10 +57,12 @@ namespace MinesweeperTests
              game.CreateBoard();
              game.Play();
              var result = game.Board.ToString();
-             const string expectedResult = "* * * * \n" +
-                                           "2 3 3 2 \n" +
-                                           "0 0 0 0 \n" +
-                                           "0 0 0 0 \n";
+             const string expectedResult = "  1 2 3 4 \n" +
+                                           "A * * * * \n" +
+                                           "B 2 3 3 2 \n" +
+                                           "C 0 0 0 0 \n" +
+                                           "D 0 0 0 0 \n";
+
              
              Assert.Equal(expectedResult, result);
              Assert.Equal(GameState.Lose, game.State);

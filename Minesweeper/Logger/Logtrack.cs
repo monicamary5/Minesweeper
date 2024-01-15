@@ -10,6 +10,7 @@ namespace Minesweeper
 
         public Logtrack()
         {
+            
             // Get the current project directory
             string projectPath = Directory.GetCurrentDirectory();
 

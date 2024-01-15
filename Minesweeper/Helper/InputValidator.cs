@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Text.RegularExpressions;
 
 namespace Minesweeper
@@ -8,8 +9,11 @@ namespace Minesweeper
         private const string LocationInputPattern = "^([A-Z]|([A-G])\\2)([0-9]|1[0-7])$";
 
         #region Grid Size Validation 
-
-        //Invalid Grid Size input validation
+        /// <summary>
+        /// Invalid Grid Size input validation
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool IsValidGridSizeInput(string input)
         {
             int result;
@@ -17,15 +21,24 @@ namespace Minesweeper
             return result > 0;
         }
 
-        //Grid Size input Minimum Validation
-        //Minimum grid size should be 3
+        /// <summary>
+        /// Grid Size input Minimum Validation
+        /// Minimum grid size should be 3
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        
         public static bool IsGridSizeMinimum(string input)
         {
             return int.Parse(input) < 3;
         }
 
-        //Grid Size input Maximum Validation
-        //Minimum grid size should be less than or Equal to 10
+        /// <summary>
+        /// Grid Size input Maximum Validation
+        /// Minimum grid size should be less than or Equal to 10
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool IsGridSizeMaximum(string input)
         {
             return int.Parse(input) > 10;
@@ -34,8 +47,11 @@ namespace Minesweeper
         #endregion
 
         #region No of Mines Input Validation
-
-        //Invalid No of mines user input validation 
+        /// <summary>
+        /// Invalid No of mines user input validation 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool IsValidNoOfMinesInput(string input)
         {
             int result;
@@ -43,14 +59,23 @@ namespace Minesweeper
             return result > 0;
         }
 
-        // Maximum number is 35% of total squares validation
+        /// <summary>
+        /// Maximum number is 35% of total squares validation
+        /// </summary>
+        /// <param name="gridInput"></param>
+        /// <param name="minesinput"></param>
+        /// <returns></returns>
         public static bool IsNoOfMinesInputMaximum(int gridInput, string minesinput)
         {
             var maxPercentageMines = gridInput * gridInput * 0.35; //eg: 4x4x0.35 formula
             return int.Parse(minesinput) > Math.Round(maxPercentageMines);
         }
 
-        // No of Mines user input is zero validation, There must be at least 1 mine.
+        /// <summary>
+        /// No of Mines user input is zero validation, There must be at least 1 mine.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool IsNoOfMinesInputZero(string input)
         {
             return input == GameInstruction.Zero;
@@ -60,8 +85,12 @@ namespace Minesweeper
 
         #region Location Validation
 
-        //User input Location Validation
-        //Location is valid if userinput is A1, A2, B1, B2 etc
+        /// <summary>
+        /// User input Location Validation
+        /// Location is valid if userinput is A1, A2, B1, B2 etc
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool IsValidLocationInput(string input)
         {
             return Regex.IsMatch(input, LocationInputPattern);

@@ -11,13 +11,19 @@ namespace Minesweeper
         public IList<Square> Squares { get; }
         public bool IsRevealed { get; private set; }
 
-        //logger for log the details
+        /// <summary>
+        /// logger for log the details
+        /// </summary>
         Logtrack logger = new Logtrack();
 
         #region Board Private Constructor
 
-        //Constructor stores the length(grid size) for accessing this value by entire class
-        //create squares based on grid size length input value.
+        /// <summary>
+        /// Constructor stores the length(grid size) for accessing this value by entire class
+        /// create squares based on grid size length input value.
+        /// </summary>
+        /// <param name="length"></param>
+
         private Board(int length)
         {
             Length = length;
@@ -28,7 +34,10 @@ namespace Minesweeper
         #endregion
 
         #region Create Squares
-        // This method is used to create squares using X and Y Values Based on Grid Size length
+
+        /// <summary>
+        /// This method is used to create squares using X and Y Values Based on Grid Size length
+        /// </summary>
         private IList<Square> CreateSquares()
         {
             var squares = new List<Square>();
@@ -55,7 +64,10 @@ namespace Minesweeper
 
         #region Create Empty Board
 
-        //this method is to create Empty board after first input value for Grid Size, No of Mines received from User
+        /// <summary>
+        /// this method is to create Empty board after first input value for Grid Size, No of Mines received from User
+        /// </summary>
+        
         public static Board CreateEmptyBoard(int size)
         {
             return new Board(size);
@@ -65,7 +77,10 @@ namespace Minesweeper
 
         #region Reveal All Squares
 
-        //Method is used to reveal all squares based on Win or Lose 
+        /// <summary>
+        /// Method is used to reveal all squares based on Win or Lose
+        /// </summary>
+        
         public void RevealAllSquares()
         {
             foreach (var square in Squares)
@@ -79,8 +94,10 @@ namespace Minesweeper
         #endregion
 
         #region Reveal One Square
-
-        //Method gets executed based on user location input to reveal the square
+        /// <summary>
+        /// Method gets executed based on user location input to reveal the square
+        /// </summary>
+        /// <param name="location"></param>
         public void RevealOneSquare(Location location)
         {
             var square = GetSquare(location);
@@ -91,8 +108,11 @@ namespace Minesweeper
         #endregion
 
         #region Get Square
-
-        //Method is used for retriving the exact square based on location for revealing to user
+        /// <summary>
+        /// Method is used for retriving the exact square based on location for revealing to user
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>Square</returns>
         public Square GetSquare(Location location)
         {
             var square = Squares.SingleOrDefault(item => item.Location.Equals(location));
@@ -101,13 +121,18 @@ namespace Minesweeper
         #endregion
 
         #region ToString Method 
-
-        //Inbuild toString method has been overidden and customize it based on requirement
+        /// <summary>
+        /// Inbuild toString method has been overidden and customize it based on requirement
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            var message = "";
+            var message = " ";
+            message += GenerateYAxisHeader();
+            message += "\n";
             for (var xValue = 0; xValue < Length; xValue++)
             {
+                message += XAxisAlphabetInBoard(xValue);
                 for (var yValue = 0; yValue < Length; yValue++)
                 {
                     var location = new Location(xValue, yValue);
@@ -135,8 +160,11 @@ namespace Minesweeper
         #endregion
 
         #region Get Neighbours Within Three By Three Area ToList
-
-        //based on each mine square getting the neighbours within 3x3 matrix area
+        /// <summary>
+        /// based on each mine square getting the neighbours within 3x3 matrix area
+        /// </summary>
+        /// <param name="centerX"></param>
+        /// <param name="centerY"></param>
         private IEnumerable<Square> GetNeighboursWithinThreeByThreeAreaToList(int centerX, int centerY)
         {
             try
@@ -171,12 +199,54 @@ namespace Minesweeper
         #endregion
 
         #region Has Location
-
-        //method to indentify the location is valid based on grid size
+        /// <summary>
+        /// method to indentify the location is valid based on grid size
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
         public bool HasLocation(Location location)
         {
             return location.X < Length && location.X >= 0 && location.Y < Length && location.Y >= 0;
         }
         #endregion
+
+        #region Generate X Axis Alphabets in Board
+        /// <summary>
+        /// Generate X Axis Alphabets in Board based on converting the int to Alphabets
+        /// </summary>
+        /// <returns></returns>
+        public string XAxisAlphabetInBoard(int currentXValue)
+        {
+            string output = "";
+            if (currentXValue == 10) { currentXValue = 0; } else { currentXValue += 1; }
+            
+            int current = currentXValue % 10;
+            currentXValue /= 10;
+            
+            if (current == 0)
+                current = 10;
+            output = (char)((char)'A' + (current - 1)) + output;
+            output += " ";
+            return output;
+        }
+        #endregion
+
+        #region Generate Y Axis Header in Board
+        /// <summary>
+        /// Generating the Board Header value for Y axis s
+        /// </summary>
+        public string GenerateYAxisHeader()
+        {
+            string yHeader = " ";
+            for(var i = 1; i<= Length; i++)
+            {
+                yHeader += i;
+                yHeader += " ";
+            }
+            return yHeader;
+        }
+        #endregion
+
+
     }
 }

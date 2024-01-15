@@ -1,5 +1,8 @@
 namespace Minesweeper
 {
+    /// <summary>
+    /// Mine Sweeper Application constant Values handled in one Static class
+    /// </summary>
     public static class GameInstruction
     {
         public const string WelcomeMessage = "Welcome to Minesweeper!";

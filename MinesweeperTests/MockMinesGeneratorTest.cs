@@ -14,8 +14,9 @@ namespace MinesweeperTests
             minesGenerator.PlaceMines(2, board);
             board.RevealAllSquares();
             
-            const string expectedResult = "* * \n" +
-                                          "0 0 \n";
+            const string expectedResult = "  1 2 \n" +
+                                          "A * * \n" +
+                                          "B 0 0 \n";
             
             Assert.Equal(expectedResult, board.ToString());
         }
@@ -28,8 +29,9 @@ namespace MinesweeperTests
             minesGenerator.PlaceMines(1, board);
             board.RevealAllSquares();
             
-            const string expectedResult = "* 0 \n" +
-                                          "0 0 \n";
+            const string expectedResult = "  1 2 \n" +
+                                          "A * 0 \n" +
+                                          "B 0 0 \n";
             
             Assert.Equal(expectedResult, board.ToString());
         }
@@ -43,10 +45,11 @@ namespace MinesweeperTests
             minesGenerator.PlaceMines(4, board);
             board.RevealAllSquares();
             
-            const string expectedResult = "* * * * \n" +
-                                          "0 0 0 0 \n" +
-                                          "0 0 0 0 \n" +
-                                          "0 0 0 0 \n";
+            const string expectedResult = "  1 2 3 4 \n" +
+                                          "A * * * * \n" +
+                                          "B 0 0 0 0 \n" +
+                                          "C 0 0 0 0 \n" +
+                                          "D 0 0 0 0 \n";
             
             Assert.Equal(expectedResult, board.ToString());
         }

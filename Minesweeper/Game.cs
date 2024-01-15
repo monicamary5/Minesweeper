@@ -3,17 +3,19 @@ using System;
 
 namespace Minesweeper
 {
-    //Have used Single Responsibility Solid Principle
-    //Also achieved OOPs concepts like abstraction and encapsulation etc
+    /// <summary>
+    /// Have used Single Responsibility Solid Principle
+    /// Also achieved OOPs concepts like abstraction and encapsulation etc
+    /// </summary>
     public class Game
     {
         private readonly IInput _input;
-        //private readonly IInput _noOfMinesinput;
-       // private readonly IInput _locationinput;
         private readonly IOutput _output;
         private readonly IGenerateMines _minesGenerator;
 
-        //logger for log the details
+        /// <summary>
+        /// logger for log the details
+        /// </summary>
         Logtrack logger = new Logtrack();
         public GameState State { get; private set; }
         public Board Board { get; private set; }
@@ -27,12 +29,12 @@ namespace Minesweeper
         }
 
         #region CreateBoard
-        /*
-         Create Board method is used to Create a board after input like Gride Size and number of mines 
-         1. Board creation for game
-         2. mines generation based on input 
-         3. Displaying the generated board with mines hidden
-         */
+        /// <summary>
+        /// Create Board method is used to Create a board after input like Gride Size and number of mines
+        ///  1. Board creation for game
+        ///  2. mines generation based on input 
+        ///  3. Displaying the generated board with mines hidden
+        /// </summary>
 
         public void CreateBoard()
         {
@@ -79,8 +81,9 @@ namespace Minesweeper
         #endregion
 
         #region DisplayBoard
-
-        //method to Display generated board in console
+        /// <summary>
+        /// method to Display generated board in console
+        /// </summary>
         private void DisplayBoard()
         {
             _output.Write(Board.ToString());
@@ -89,10 +92,11 @@ namespace Minesweeper
         #endregion
 
         #region SetGridSizeValue
-
-        /* 1. SetGridSizeValue Method is used to get the input parameters like grid Size
-          2. Validating the input paramters like grid Size
-       */
+        /// <summary>
+        /// 1. SetGridSizeValue Method is used to get the input parameters like grid Size
+        /// 2. Validating the input paramters like grid Size
+        /// </summary>
+        /// <returns></returns>
 
         private int SetGridSizeValue()
         {
@@ -128,10 +132,13 @@ namespace Minesweeper
 
         #region Grid Size input Validation
 
-        /* Validating below Grid Size input Value and based on conditions like  
-            1. Grid size input should be integer
-            2. Grid size maximum value is 10 and minimum value is 2
-        */
+        /// <summary>
+        /// Validating below Grid Size input Value and based on conditions like
+        /// 1. Grid size input should be integer
+        /// 2. Grid size maximum value is 10 and minimum value is 2
+        /// </summary>
+        /// <param name="gridSizeInput"></param>
+        /// <returns></returns>
 
         private static string GridSizeInputIsNotValid(string gridSizeInput)
         {
@@ -152,10 +159,12 @@ namespace Minesweeper
         #endregion
 
         #region SetNoOfMinesValue
-
-        /* 1. SetGridSizeValue Method is used to get the input parameters like grid Size
-          2. Validating the input paramters like grid Size
-       */
+        /// <summary>
+        /// 1. SetGridSizeValue Method is used to get the input parameters like grid Size
+        /// 2. Validating the input paramters like grid Size
+        /// </summary>
+        /// <param name="gridSizeValue"></param>
+        /// <returns></returns>
         private int SetNoOfMinesValue(int gridSizeValue)
         {
             try
@@ -184,11 +193,14 @@ namespace Minesweeper
         #endregion
 
         #region Grid Size input Validation
-
-        /* Validating below Grid Size input Value and based on conditions like  
-           1. Grid size input should be integer
-           2. Grid size maximum value is 10 and minimum value is 2
-       */
+        /// <summary>
+        /// Validating below Grid Size input Value and based on conditions like  
+        /// 1. Grid size input should be integer
+        /// 2. Grid size maximum value is 10 and minimum value is 2
+        /// </summary>
+        /// <param name="gridSizeInput"></param>
+        /// <param name="noOfMinesInput"></param>
+        /// <returns></returns>
 
         private static string NoOfMinesInputIsNotValid(int gridSizeInput, string noOfMinesInput)
         {
@@ -209,8 +221,9 @@ namespace Minesweeper
         #endregion
 
         #region GamePlay
-
-        //Method to validate the move and decide the Game over or Won
+        /// <summary>
+        /// Method to validate the move and decide the Game over or Won
+        /// </summary>
         public void Play()
         {
             try
@@ -262,7 +275,11 @@ namespace Minesweeper
 
         #region Reveal Board Based on Location input
 
-        // Method to reveal the board based on location input
+        /// <summary>
+        /// Method to reveal the board based on location input
+        /// </summary>
+        /// <param name="newLocation"></param>
+        /// 
         private void RevealTheSquareIfLocationIsOnBoard(Location newLocation)
         {
             if (Board.HasLocation(newLocation))
@@ -278,6 +295,11 @@ namespace Minesweeper
         #endregion
 
         #region Create Location
+        /// <summary>
+        /// Method to get the user input to reveal the location 
+        /// Validation for the location 
+        /// </summary>
+        /// <returns></returns>
         private Location CreateLocationBasedOnInput()
         {
             try
@@ -303,6 +325,11 @@ namespace Minesweeper
         #endregion
 
         #region Location Input Validation
+        /// <summary>
+        /// Location Input Validation Trigger method 
+        /// </summary>
+        /// <param name="locationInput"></param>
+        /// <returns></returns>
         private static bool LocationInputIsNotValid(string locationInput)
         {
             return !InputValidator.IsValidLocationInput(locationInput);
@@ -310,6 +337,10 @@ namespace Minesweeper
         #endregion
 
         #region BoardIsNotRevealed
+        /// <summary>
+        /// Method is to set the board is revealed or not
+        /// </summary>
+        /// <returns></returns>
         private bool BoardIsNotRevealed()
         {
             return !Board.IsRevealed;

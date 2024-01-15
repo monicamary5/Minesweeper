@@ -1,5 +1,5 @@
 # Minesweeper
-This Application is developed in .netCore which requires the Microsoft .Net Core Runtime - 3.1.32(x64) (you can download using below link)
+This Application is developed in .netCore which requires the Microsoft .Net Core Runtime - 3.1.32(x64) for running the application. (you can download using below link)
 https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-aspnetcore-3.1.32-windows-x64-installer
 
 
